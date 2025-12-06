@@ -1,51 +1,53 @@
 module.exports = {
-  schemas: {
-    Categoria: {
-      type: "object",
-      properties: {
-        id: { type: "integer", example: 1 },
-        nombre: { type: "string", example: "Postres" },
-        descripcion: { type: "string", example: "Dulces y tortas" },
+  components: {
+    schemas: {
+      Categoria: {
+        type: "object",
+        properties: {
+          nombre: { type: "string", example: "Postres" },
+          descripcion: { type: "string", example: "Dulces y tortas" }
+        },
+        required: ["nombre"]
       },
-    },
 
-    Ingrediente: {
-      type: "object",
-      properties: {
-        id: { type: "integer", example: 10 },
-        nombre: { type: "string", example: "Harina" },
-        stock: { type: "number", example: 40 },
+      Ingrediente: {
+        type: "object",
+        properties: {
+          nombre: { type: "string", example: "Tomate" },
+          stock: { type: "integer", example: 50 }
+        },
+        required: ["nombre", "stock"]
       },
-    },
 
-    Pedido: {
-      type: "object",
-      properties: {
-        id: { type: "integer", example: 5 },
-        cliente: { type: "string", example: "Juan Pérez" },
-        total: { type: "number", example: 55000 },
-        estado: { type: "string", example: "pendiente" },
+      Plato: {
+        type: "object",
+        properties: {
+          nombre: { type: "string", example: "Pizza Margarita" },
+          precio: { type: "number", example: 32000 },
+          categoria_id: { type: "integer", example: 1 }
+        },
+        required: ["nombre", "precio", "categoria_id"]
       },
-    },
 
-    PlatoIngrediente: {
-      type: "object",
-      properties: {
-        id: { type: "integer", example: 30 },
-        plato_id: { type: "integer", example: 4 },
-        ingrediente_id: { type: "integer", example: 10 },
-        cantidad: { type: "integer", example: 2 },
+      Pedido: {
+        type: "object",
+        properties: {
+          cliente: { type: "string", example: "Juan Pérez" },
+          total: { type: "number", example: 45000 },
+          estado: { type: "string", example: "pendiente" }
+        },
+        required: ["cliente", "total", "estado"]
       },
-    },
 
-    Plato: {
-      type: "object",
-      properties: {
-        id: { type: "integer", example: 3 },
-        nombre: { type: "string", example: "Pizza Margarita" },
-        precio: { type: "number", example: 32000 },
-        categoria_id: { type: "integer", example: 1 },
-      },
-    },
-  },
+      PlatoIngrediente: {
+        type: "object",
+        properties: {
+          plato_id: { type: "integer", example: 3 },
+          ingrediente_id: { type: "integer", example: 10 },
+          cantidad: { type: "integer", example: 2 }
+        },
+        required: ["plato_id", "ingrediente_id", "cantidad"]
+      }
+    }
+  }
 };

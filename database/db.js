@@ -1,17 +1,16 @@
-// database/db.js
 const sqlite3 = require("sqlite3").verbose();
 const path = require("path");
 
-// Ruta ABSOLUTA al archivo food.db
-const DB_PATH = path.join(__dirname, "food.db");
+const DB_PATH = path.resolve(__dirname, "database.sqlite");  // << STRING REAL
 
-// Crear conexión
+console.log("Usando base de datos en:", DB_PATH);
+
 const db = new sqlite3.Database(DB_PATH, (err) => {
-    if (err) {
-        console.error("❌ Error al conectar la base de datos:", err.message);
-    } else {
-        console.log("📦 Base de datos conectada:", DB_PATH);
-    }
+  if (err) {
+    console.error("Error al conectar a SQLite:", err.message);
+    return;
+  }
+  console.log("Conexión exitosa a la base de datos SQLite");
 });
 
 module.exports = db;
