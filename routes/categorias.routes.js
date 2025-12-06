@@ -7,18 +7,6 @@ const controller = require("../controllers/categorias.controller");
  * tags:
  *   name: Categorías
  *   description: Endpoints para gestionar categorías
- *
- * components:
- *   schemas:
- *     Categoria:
- *       type: object
- *       properties:
- *         id:
- *           type: integer
- *         nombre:
- *           type: string
- *         descripcion:
- *           type: string
  */
 
 /**
@@ -30,6 +18,15 @@ const controller = require("../controllers/categorias.controller");
  *     responses:
  *       200:
  *         description: Lista de categorías
+ *         content:
+ *           application/json:
+ *             example:
+ *               - id: 1
+ *                 nombre: "Postres"
+ *                 descripcion: "Dulces y tortas"
+ *               - id: 2
+ *                 nombre: "Bebidas"
+ *                 descripcion: "Frías y calientes"
  */
 router.get("/", controller.getCategorias);
 
@@ -44,10 +41,16 @@ router.get("/", controller.getCategorias);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Categoria'
+ *             $ref: "#/components/schemas/Categoria"
  *     responses:
  *       201:
  *         description: Categoría creada
+ *         content:
+ *           application/json:
+ *             example:
+ *               id: 3
+ *               nombre: "Entradas"
+ *               descripcion: "Platos para iniciar"
  */
 router.post("/", controller.createCategoria);
 
@@ -55,15 +58,17 @@ router.post("/", controller.createCategoria);
  * @swagger
  * /categorias/{id}:
  *   delete:
- *     summary: Elimina una categoría
+ *     summary: Elimina una categoría por ID
  *     tags: [Categorías]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
+ *         schema:
+ *           type: integer
  *     responses:
  *       200:
- *         description: Categoría eliminada
+ *         description: Categoría eliminada exitosamente
  */
 router.delete("/:id", controller.deleteCategoria);
 

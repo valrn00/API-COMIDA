@@ -6,32 +6,24 @@ const controller = require("../controllers/platoIngredientes.controller");
  * @swagger
  * tags:
  *   name: PlatoIngredientes
- *   description: Relaciones entre platos e ingredientes (N:N)
- *
- * components:
- *   schemas:
- *     PlatoIngrediente:
- *       type: object
- *       properties:
- *         id:
- *           type: integer
- *         plato_id:
- *           type: integer
- *         ingrediente_id:
- *           type: integer
- *         cantidad:
- *           type: integer
+ *   description: Relación entre platos e ingredientes
  */
 
 /**
  * @swagger
  * /plato-ingredientes:
  *   get:
- *     summary: Obtiene todas las relaciones plato-ingrediente
+ *     summary: Lista relaciones plato-ingrediente
  *     tags: [PlatoIngredientes]
  *     responses:
  *       200:
- *         description: Lista de relaciones
+ *         description: Lista completa
+ *         content:
+ *           application/json:
+ *             example:
+ *               - plato_id: 3
+ *                 ingrediente_id: 10
+ *                 cantidad: 2
  */
 router.get("/", controller.getAll);
 
@@ -46,7 +38,7 @@ router.get("/", controller.getAll);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/PlatoIngrediente'
+ *             $ref: "#/components/schemas/PlatoIngrediente"
  *     responses:
  *       201:
  *         description: Relación creada
@@ -67,9 +59,13 @@ router.post("/", controller.create);
  *           type: integer
  *     responses:
  *       200:
- *         description: Ingredientes del plato
+ *         description: Ingredientes asociados
+ *         content:
+ *           application/json:
+ *             example:
+ *               - ingrediente: "Tomate"
+ *                 cantidad: 1
  */
 router.get("/:plato_id", controller.getIngredientesPorPlato);
 
 module.exports = router;
-
